@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #060b0b57, #580b37af);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4ecdc4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #45b7b0;
+        }
+
+        .links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #4ecdc4;
+        }
+
+        .otp-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .otp-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-header">
+            <h1>Welcome Back</h1>
+            <p>Please login to continue</p>
+        </div>
+        
+        <form id="loginForm" onsubmit="event.preventDefault(); handleLogin()">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="links">
+            <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+            <a href="#" onclick="showSignUp()">New User? Sign Up</a>
+        </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div id="otpModal" class="otp-modal">
+        <div class="otp-content">
+            <h2>Verify OTP</h2>
+            <input type="text" id="otp" placeholder="Enter OTP" maxlength="6">
+            <button onclick="verifyOTP()" style="margin-top: 1rem;">Verify</button>
+        </div>
+    </div>
+
+    <script>
+        let generatedOTP = null;
+
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Add actual login validation here
+            console.log('Login attempted with:', email, password);
+            alert('Login functionality needs backend integration');
+        }
+
+        function showForgotPassword() {
+            const email = prompt('Please enter your email address:');
+            if (email) {
+                generatedOTP = Math.floor(100000 + Math.random() * 900000);
+                
+                // Simulate OTP sending (replace with actual email sending)
+                console.log(`Simulated OTP sent to ${email}: ${generatedOTP}`);
+                alert(`Simulated OTP sent to ${email}`);
+                
+                document.getElementById('otpModal').style.display = 'flex';
+            }
+        }
+
+        function verifyOTP() {
+            const enteredOTP = document.getElementById('otp').value;
+            if (enteredOTP == generatedOTP) {
+                alert('OTP verified! Redirecting to password reset...');
+                document.getElementById('otpModal').style.display = 'none';
+            } else {
+                alert('Invalid OTP. Please try again.');
+            }
+        }
+
+        function showSignUp() {
+            alert('Redirecting to sign up page...');
+            // Add actual signup redirection
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('otpModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
+                          <!-- background-color -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Particle Background</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        
+        // Renderer Configuration
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Particle System
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particleCount = 5000;
+        
+        // Generate Random Particles Position
+        const posArray = new Float32Array(particleCount * 3);
+        for(let i=0; i<particleCount*3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 5;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        // Particle Material
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#00ff88',
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 3;
+
+        // Mouse Interaction
+        const mouse = { x:0, y:0 }
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / window.innerWidth) - 0.5;
+            mouse.y = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Particle Movement
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.001;
+            
+            // Mouse Follow Effect
+            camera.position.x += (mouse.x * 2 - camera.position.x) * 0.01;
+            camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.01;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
